@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VIT KingReyJr - Visitor Stats</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        :root {
+            --vitality-yellow: #F5C229;
+            --vitality-black: #000000;
+        }
+
+        body {
+            min-height: 100vh;
+            background: transparent;
+            font-family: 'Inter', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            margin: 0;
+        }
+
+        .bg-glow {
+            display: none;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .card {
+            background: linear-gradient(145deg, #111 0%, #000 100%);
+            border: 2px solid var(--vitality-yellow);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 0 40px rgba(245,194,41,0.1);
+            max-width: 380px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .brand h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 42px;
+            color: var(--vitality-yellow);
+            letter-spacing: 5px;
+        }
+
+        .brand p {
+            font-size: 11px;
+            color: #666;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 4px;
+        }
+
+        /* Website badge */
+        .website-badge {
+            background: rgba(245,194,41,0.1);
+            border: 1px solid rgba(245,194,41,0.3);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .website-badge .label {
+            font-size: 10px;
+            color: #888;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .website-badge .url {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--vitality-yellow);
+        }
+
+        /* Counter */
+        .counter-box {
+            background: rgba(0,0,0,0.5);
+            border: 1px solid rgba(245,194,41,0.2);
+            border-radius: 16px;
+            padding: 28px;
+            text-align: center;
+        }
+
+        .counter-label {
+            font-size: 11px;
+            color: #555;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .counter-value {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 68px;
+            color: #fff;
+            line-height: 1;
+            text-shadow: 0 0 30px rgba(245,194,41,0.3);
+        }
+
+        .live-indicator {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 14px;
+        }
+
+        .live-dot {
+            width: 8px;
+            height: 8px;
+            background: #22c55e;
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .live-text {
+            font-size: 10px;
+            color: #22c55e;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            padding-top: 16px;
+            border-top: 1px solid rgba(245,194,41,0.1);
+        }
+
+        .hashtag {
+            font-size: 11px;
+            color: #444;
+            letter-spacing: 2px;
+        }
+
+        .hashtag span {
+            color: var(--vitality-yellow);
+        }
+
+        .player-tag {
+            margin-top: 6px;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 14px;
+            color: #333;
+            letter-spacing: 3px;
+        }
+
+        /* Loading dots */
+        .loading {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            height: 68px;
+            align-items: center;
+        }
+
+        .loading-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--vitality-yellow);
+            border-radius: 50%;
+            animation: bounce 1.4s infinite;
+        }
+
+        .loading-dot:nth-child(2) { animation-delay: 0.2s; }
+        .loading-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.5; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-glow"></div>
+    
+    <div class="container">
+        <div class="card">
+            <!-- Header -->
+            <div class="header">
+                <div class="brand">
+                    <h1>TEAM VITALITY</h1>
+                    <p>Visitor Tracker</p>
+                </div>
+            </div>
+
+            <!-- Website Badge -->
+            <div class="website-badge">
+                <div class="label">Tracking</div>
+                <div class="url">www.kingreyjr.com</div>
+            </div>
+
+            <!-- Counter -->
+            <div class="counter-box">
+                <div class="counter-label">Total Visitors</div>
+                <div id="counter" class="counter-value">
+                    <div class="loading">
+                        <div class="loading-dot"></div>
+                        <div class="loading-dot"></div>
+                        <div class="loading-dot"></div>
+                    </div>
+                </div>
+                <div class="live-indicator">
+                    <div class="live-dot"></div>
+                    <span class="live-text">Live</span>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="footer">
+                <div class="hashtag">#<span>V</span>FOR<span>VICTORY</span></div>
+                <div class="player-tag">VIT KINGREYJR | TEKKEN CHAMPION</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const NAMESPACE = 'vit-kingreyjr-2025jan';
+        const KEY = 'counter-v1';
+        const FALLBACK = 0;
+        const counter = document.getElementById('counter');
+
+        function animate(target) {
+            let current = 0;
+            const step = target / 60;
+            counter.innerHTML = '0';
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    counter.innerHTML = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    counter.innerHTML = Math.floor(current).toLocaleString();
+                }
+            }, 33);
+        }
+
+        async function load() {
+            try {
+                const res = await fetch(`https://api.countapi.xyz/hit/${NAMESPACE}/${KEY}`);
+                const data = await res.json();
+                animate(data.value);
+            } catch (e) {
+                let count = localStorage.getItem('vc') || FALLBACK;
+                count = parseInt(count) + 1;
+                localStorage.setItem('vc', count);
+                animate(count);
+            }
+        }
+
+        load();
+    </script>
+</body>
+</html>
